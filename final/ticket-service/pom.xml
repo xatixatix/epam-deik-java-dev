@@ -20,10 +20,58 @@
         <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
         <checkstyle-maven-plugin.version>3.1.2</checkstyle-maven-plugin.version>
         <surefire-maven-plugin.version>3.0.0-M5</surefire-maven-plugin.version>
+        <spring-boot.version>3.1.5</spring-boot.version>
+        <spring-framework-shell.version>3.1.4</spring-framework-shell.version>
+        <lombok.version>1.18.30</lombok.version>
+        <hibernate.version>6.3.1.Final</hibernate.version>
+        <h2.version>2.2.224</h2.version>
+        <mysql-connector.version>8.1.0</mysql-connector.version>
         <junit-jupiter.version>5.7.1</junit-jupiter.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.shell</groupId>
+            <artifactId>spring-shell-starter</artifactId>
+            <version>${spring-framework-shell.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>${mysql-connector.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
