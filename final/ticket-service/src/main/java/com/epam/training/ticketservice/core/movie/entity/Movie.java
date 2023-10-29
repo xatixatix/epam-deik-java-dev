@@ -17,4 +17,9 @@ public class Movie {
     private String title;
     private String genre;
     private int length;
+
+    @Override
+    public String toString(){
+        return title + " (" + genre + ", " + length + " minutes)";
+    }
 }
