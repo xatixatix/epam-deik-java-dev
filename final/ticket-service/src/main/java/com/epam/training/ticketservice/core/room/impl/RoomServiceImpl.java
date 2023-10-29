@@ -36,4 +36,9 @@ public class RoomServiceImpl implements RoomService {
     public List<Room> listRooms() {
         return roomRepository.findAll();
     }
+
+    @Override
+    public Room findByName(String name) {
+        return roomRepository.findByName(name);
+    }
 }

@@ -37,7 +37,7 @@ public class MovieCommands {
     @ShellMethod(key = "list movies", value = "List movies")
     private String listMovies() {
         List<Movie> movies = movieService.listMovies();
-        if(movies.isEmpty()){
+        if (movies.isEmpty()) {
             return "There are no movies at the moment";
         } else {
             return movies.stream()

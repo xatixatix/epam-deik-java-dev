@@ -37,7 +37,7 @@ public class RoomCommands {
     @ShellMethod(key = "list rooms", value = "List rooms")
     private String listRooms() {
         List<Room> rooms = roomService.listRooms();
-        if(rooms.isEmpty()){
+        if (rooms.isEmpty()) {
             return "There are no rooms at the moment";
         } else {
             return rooms.stream()
