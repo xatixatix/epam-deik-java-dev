@@ -1,14 +1,14 @@
 package com.epam.training.ticketservice.core.user.entity;
 
-import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 @Entity
-@Table(name = "Users")
 @Data
 @NoArgsConstructor
-public class User {
+public class MyUser {
 
     @Id
     @GeneratedValue
@@ -19,7 +19,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private PERMISSION permission;
 
-    public User(String name, String password, PERMISSION permission) {
+    public MyUser(String name, String password, PERMISSION permission) {
         this.name = name;
         this.password = password;
         this.permission = permission;
