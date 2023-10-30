@@ -7,4 +7,10 @@ import java.util.Optional;
 public interface MyUserService {
 
     Optional<MyUser> login(String username, String password);
+
+    void signOut();
+
+    void register(MyUser newUser);
+
+    String describe();
 }

@@ -27,4 +27,21 @@ public class MyUserCommands {
         return user.map(value -> " Successful privileged login!")
                 .orElse("Login failed due to incorrect credentials");
     }
+
+    @ShellMethod(key = "sign up", value = "Register a new user")
+    public String register(String username, String password) {
+        myUserService.register(new MyUser(username, password, MyUser.PERMISSION.USER));
+        return "Registered successfully";
+    }
+
+    @ShellMethod(key = "sign out", value = "Sign out")
+    public String signOut() {
+        myUserService.signOut();
+        return "You signed out successfully";
+    }
+
+    @ShellMethod(key = "describe account", value = "Describe account if a user is logged in and lists their tickets")
+    public String describe() {
+        return myUserService.describe();
+    }
 }
