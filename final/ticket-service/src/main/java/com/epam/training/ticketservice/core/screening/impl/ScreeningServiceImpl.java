@@ -20,21 +20,40 @@ public class ScreeningServiceImpl implements ScreeningService {
     }
 
     @Override
-    public boolean isOverlapping(Screening screeningToCheck) {
+    public void deleteScreening(Screening screening) {
+        screeningRepository.delete(screeningRepository.findByRoomNameAndMovieAndStartTime(
+                screening.getRoom().getName(),
+                screening.getMovie(),
+                screening.getStartTime()
+        ));
+    }
 
-        //TODO: this is not working
+    @Override
+    public boolean isOverlapping(Screening screeningToCheck) {
+        return overlapHelper(screeningToCheck, 0L);
+    }
+
+    @Override
+    public boolean isBreakTime(Screening screeningToCheck) {
+        return overlapHelper(screeningToCheck, 10L);
+    }
+
+    private boolean overlapHelper(Screening screeningToCheck, Long timeToAddAtEnd) {
         List<Screening> screeningList = screeningRepository.findAllByRoomName(screeningToCheck.getRoom().getName());
+
         if (screeningList.isEmpty()) {
             return false;
         }
-        boolean isOverlapping = false;
+
         for (Screening screening : screeningList) {
-            if (    //screening starts, screeningToCheck can't start within the playtime
+            if (    //screening starts, screeningToCheck can't start within the playtime + timeToAddAtEnd
                     (screening.getStartTime().isBefore(screeningToCheck.getStartTime()) &&
-                            screeningToCheck.getStartTime().isAfter(screening.getStartTime().plusMinutes(screening.getMovie().getLength()))) ||
-                            //screeningToCheck starts, screening can't start within the playtime
+                            screeningToCheck.getStartTime().isAfter(screening.getStartTime().plusMinutes(screening.getMovie().getLength() + timeToAddAtEnd))) ||
+                            //screeningToCheck starts, screening can't start within the playtime + timeToAddAtEnd
                             (screeningToCheck.getStartTime().isBefore(screening.getStartTime()) &&
-                                    screening.getStartTime().isAfter(screeningToCheck.getStartTime().plusMinutes(screeningToCheck.getMovie().getLength())))) {
+                                    screening.getStartTime().isAfter(screeningToCheck.getStartTime().plusMinutes(screeningToCheck.getMovie().getLength() + timeToAddAtEnd)))) {
+                //nothing happens
+            } else {
                 return true;
             }
         }

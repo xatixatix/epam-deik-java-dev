@@ -27,10 +27,18 @@ public class ScreeningCommands {
     private String createScreening(String movieName, String roomName, String startTime) throws ParseException {
         if (screeningService.isOverlapping(screeningCreator(movieName, roomName, startTime))) {
             return "There is an overlapping screening";
+        } else if (screeningService.isBreakTime(screeningCreator(movieName, roomName, startTime))) {
+            return "This would start in the break period after another screening in this room";
         } else {
             screeningService.createScreening(screeningCreator(movieName, roomName, startTime));
             return "New screening created successfully";
         }
+    }
+
+    @ShellMethod(key = "delete screening", value = "Create a new screening")
+    private String deleteScreening(String movieName, String roomName, String startTime) throws ParseException {
+        screeningService.deleteScreening(screeningCreator(movieName, roomName, startTime));
+        return "Screening deleted successfully";
     }
 
     @ShellMethod(key = "list screenings", value = "List screenings")
