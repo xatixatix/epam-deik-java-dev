@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
-import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -24,7 +23,7 @@ public class ScreeningCommands {
     private final ScreeningService screeningService;
 
     @ShellMethod(key = "create screening", value = "Create a new screening")
-    private String createScreening(String movieName, String roomName, String startTime) throws ParseException {
+    private String createScreening(String movieName, String roomName, String startTime) {
         if (screeningService.isOverlapping(screeningCreator(movieName, roomName, startTime))) {
             return "There is an overlapping screening";
         } else if (screeningService.isBreakTime(screeningCreator(movieName, roomName, startTime))) {
@@ -36,7 +35,7 @@ public class ScreeningCommands {
     }
 
     @ShellMethod(key = "delete screening", value = "Create a new screening")
-    private String deleteScreening(String movieName, String roomName, String startTime) throws ParseException {
+    private String deleteScreening(String movieName, String roomName, String startTime) {
         screeningService.deleteScreening(screeningCreator(movieName, roomName, startTime));
         return "Screening deleted successfully";
     }
@@ -53,7 +52,7 @@ public class ScreeningCommands {
         }
     }
 
-    private Screening screeningCreator(String movieName, String roomName, String startTime) throws ParseException {
+    private Screening screeningCreator(String movieName, String roomName, String startTime) {
         return new Screening(
                 movieService.findByTitle(movieName),
                 roomService.findByName(roomName),
