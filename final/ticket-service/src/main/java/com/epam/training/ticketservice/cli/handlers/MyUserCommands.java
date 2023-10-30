@@ -30,7 +30,7 @@ public class MyUserCommands {
 
     @ShellMethod(key = "sign up", value = "Register a new user")
     public String register(String username, String password) {
-        myUserService.register(new MyUser(username, password, MyUser.PERMISSION.USER));
+        myUserService.register(new MyUser(username, password, MyUser.Permission.USER));
         return "Registered successfully";
     }
 

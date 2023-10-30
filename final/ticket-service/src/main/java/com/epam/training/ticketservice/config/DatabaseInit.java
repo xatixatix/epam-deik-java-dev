@@ -17,7 +17,7 @@ public class DatabaseInit {
 
     @PostConstruct
     public void init() {
-        MyUser admin = new MyUser("admin", "admin", MyUser.PERMISSION.ADMIN);
+        MyUser admin = new MyUser("admin", "admin", MyUser.Permission.ADMIN);
         myUserRepository.save(admin);
     }
 }

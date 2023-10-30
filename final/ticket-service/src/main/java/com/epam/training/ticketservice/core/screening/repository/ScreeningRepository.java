@@ -10,5 +10,6 @@ import java.util.List;
 public interface ScreeningRepository extends JpaRepository<Screening, String> {
 
     Screening findByRoomNameAndMovieAndStartTime(String roomName, Movie movie, LocalDateTime startTime);
+
     List<Screening> findAllByRoomName(String roomName);
 }

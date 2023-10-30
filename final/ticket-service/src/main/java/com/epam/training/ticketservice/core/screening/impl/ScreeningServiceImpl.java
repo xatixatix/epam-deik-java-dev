@@ -21,11 +21,11 @@ public class ScreeningServiceImpl implements ScreeningService {
 
     @Override
     public void deleteScreening(Screening screening) {
-        screeningRepository.delete(screeningRepository.findByRoomNameAndMovieAndStartTime(
-                screening.getRoom().getName(),
-                screening.getMovie(),
-                screening.getStartTime()
-        ));
+        screeningRepository.delete(
+                screeningRepository.findByRoomNameAndMovieAndStartTime(
+                        screening.getRoom().getName(), screening.getMovie(), screening.getStartTime()
+                )
+        );
     }
 
     @Override
@@ -46,12 +46,19 @@ public class ScreeningServiceImpl implements ScreeningService {
         }
 
         for (Screening screening : screeningList) {
-            if (    //screening starts, screeningToCheck can't start within the playtime + timeToAddAtEnd
-                    (screening.getStartTime().isBefore(screeningToCheck.getStartTime()) &&
-                            screeningToCheck.getStartTime().isAfter(screening.getStartTime().plusMinutes(screening.getMovie().getLength() + timeToAddAtEnd))) ||
+            if (//screening starts, screeningToCheck can't start within the playtime + timeToAddAtEnd
+                    (screening.getStartTime()
+                            .isBefore(screeningToCheck.getStartTime()) && screeningToCheck.getStartTime()
+                            .isAfter(screening.getStartTime()
+                                    .plusMinutes(screening.getMovie()
+                                            .getLength() + timeToAddAtEnd)))
                             //screeningToCheck starts, screening can't start within the playtime + timeToAddAtEnd
-                            (screeningToCheck.getStartTime().isBefore(screening.getStartTime()) &&
-                                    screening.getStartTime().isAfter(screeningToCheck.getStartTime().plusMinutes(screeningToCheck.getMovie().getLength() + timeToAddAtEnd)))) {
+                            || (screeningToCheck.getStartTime()
+                            .isBefore(screening.getStartTime())
+                            && screening.getStartTime()
+                            .isAfter(screeningToCheck.getStartTime()
+                                    .plusMinutes(screeningToCheck.getMovie()
+                                            .getLength() + timeToAddAtEnd)))) {
                 //nothing happens
             } else {
                 return true;

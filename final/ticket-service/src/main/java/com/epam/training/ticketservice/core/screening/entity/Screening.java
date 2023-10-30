@@ -34,6 +34,9 @@ public class Screening {
 
     @Override
     public String toString() {
-        return movie.toString() + ", screened in room " + room.getName() + ", at " + startTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        return movie.toString()
+                + ", screened in room "
+                + room.getName() + ", at "
+                + startTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 }

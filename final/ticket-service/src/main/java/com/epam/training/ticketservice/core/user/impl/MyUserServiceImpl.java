@@ -40,9 +40,9 @@ public class MyUserServiceImpl implements MyUserService {
     public String describe() {
         if (userLoggedIn.isEmpty()) {
             return "You are not signed in";
-        } else if (userLoggedIn.get().getPermission() == MyUser.PERMISSION.USER) {
+        } else if (userLoggedIn.get().getPermission() == MyUser.Permission.USER) {
             return "Signed in with account '" + userLoggedIn.get().getName() + "'";
-        } else if (userLoggedIn.get().getPermission() == MyUser.PERMISSION.ADMIN) {
+        } else if (userLoggedIn.get().getPermission() == MyUser.Permission.ADMIN) {
             return "Signed in with privileged account '" + userLoggedIn.get().getName() + "'";
         } else {
             return "Not implemented yet.";

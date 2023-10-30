@@ -19,7 +19,7 @@ public class Movie {
     private int length;
 
     @Override
-    public String toString(){
+    public String toString() {
         return title + " (" + genre + ", " + length + " minutes)";
     }
 }

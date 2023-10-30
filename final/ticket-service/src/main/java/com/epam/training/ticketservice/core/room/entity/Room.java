@@ -19,7 +19,7 @@ public class Room {
     private int columns;
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Room " + name + " with " + (rows * columns) + " seats, " + rows + " rows and " + columns + " columns";
     }
 }
