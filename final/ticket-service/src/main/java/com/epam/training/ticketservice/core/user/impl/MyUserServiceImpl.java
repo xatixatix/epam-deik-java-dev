@@ -45,7 +45,7 @@ public class MyUserServiceImpl implements MyUserService {
         } else if (userLoggedIn.get().getPermission() == MyUser.Permission.ADMIN) {
             return "Signed in with privileged account '" + userLoggedIn.get().getName() + "'";
         } else {
-            return "Not implemented yet.";
+            return "Not implemented.";
         }
 
         //TODO: list tickets
