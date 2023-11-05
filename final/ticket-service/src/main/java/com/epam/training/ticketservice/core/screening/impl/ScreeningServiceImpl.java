@@ -1,11 +1,14 @@
 package com.epam.training.ticketservice.core.screening.impl;
 
+import com.epam.training.ticketservice.core.movie.entity.Movie;
+import com.epam.training.ticketservice.core.room.entity.Room;
 import com.epam.training.ticketservice.core.screening.ScreeningService;
 import com.epam.training.ticketservice.core.screening.entity.Screening;
 import com.epam.training.ticketservice.core.screening.repository.ScreeningRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -70,5 +73,10 @@ public class ScreeningServiceImpl implements ScreeningService {
     @Override
     public List<Screening> listScreenings() {
         return screeningRepository.findAll();
+    }
+
+    @Override
+    public Screening findByMovieAndStartTime(Movie movie, Room room, LocalDateTime startTime) {
+        return screeningRepository.findByRoomNameAndMovieAndStartTime(room.getName(), movie, startTime);
     }
 }

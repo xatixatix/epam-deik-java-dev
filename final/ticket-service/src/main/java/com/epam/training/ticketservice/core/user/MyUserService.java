@@ -13,4 +13,6 @@ public interface MyUserService {
     void register(MyUser newUser);
 
     String describe();
+
+    MyUser userLoggedIn();
 }

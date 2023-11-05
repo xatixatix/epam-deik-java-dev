@@ -50,4 +50,9 @@ public class MyUserServiceImpl implements MyUserService {
 
         //TODO: list tickets
     }
+
+    @Override
+    public MyUser userLoggedIn() {
+        return userLoggedIn.get();
+    }
 }
