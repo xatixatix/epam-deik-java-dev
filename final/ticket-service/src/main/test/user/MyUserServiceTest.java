@@ -88,4 +88,17 @@ class MyUserServiceTest {
 
         assertEquals("Signed in with privileged account 'newName'", myUserService.describe());
     }
+
+    @Test
+    void signOutSignsUserOut(){
+        MyUser newUser = new MyUser("newName", "newPassword", MyUser.Permission.ADMIN);
+        myUserService.register(newUser);
+
+        Mockito.when(myUserRepository
+                .findByNameAndPassword("newName", "newPassword")).thenReturn(Optional.of(newUser));
+
+        myUserService.login("newName", "newPassword");
+        myUserService.signOut();
+        assertEquals("You are not signed in", myUserService.describe());
+    }
 }

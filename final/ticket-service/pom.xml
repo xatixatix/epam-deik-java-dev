@@ -135,6 +135,9 @@
                                 <exclude>
                                     com/epam/training/ticketservice/cli/**
                                 </exclude>
+                                <exclude>
+                                    com/epam/training/ticketservice/core/**/entity/**
+                                </exclude>
                             </excludes>
                             <rules>
                                 <rule>

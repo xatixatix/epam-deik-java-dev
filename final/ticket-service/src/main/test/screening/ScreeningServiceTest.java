@@ -14,7 +14,11 @@ import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
 
 class ScreeningServiceTest {
@@ -60,5 +64,38 @@ class ScreeningServiceTest {
         screeningService.deleteScreening(newScreening);
 
         verify(screeningRepositoryMock).delete(newScreening);
+    }
+
+    @Test
+    void overlappingScreeningReturnsTrue() {
+        List<Screening> screeningList = new ArrayList<>();
+        screeningList.add(new Screening(testMovie, testRoom, testStartTime));
+        Screening newOverlappingScreening = new Screening(
+                testMovie,
+                testRoom,
+                LocalDateTime.parse("2021-03-15 11:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+        Mockito.when(screeningRepositoryMock.findAllByRoomName(newOverlappingScreening.getRoom().getName())).thenReturn(screeningList);
+
+        assertTrue(screeningService.isOverlapping(newOverlappingScreening));
+    }
+
+    @Test
+    void overlappingScreeningReturnsFalseAfterComparingScreenings() {
+        List<Screening> screeningList = new ArrayList<>();
+        screeningList.add(new Screening(testMovie, testRoom, testStartTime));
+        Screening newOverlappingScreening = new Screening(
+                testMovie,
+                testRoom,
+                LocalDateTime.parse("2021-03-15 10:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+        Mockito.when(screeningRepositoryMock.findAllByRoomName(newOverlappingScreening.getRoom().getName())).thenReturn(screeningList);
+
+        assertTrue(screeningService.isOverlapping(newOverlappingScreening));
+    }
+
+    @Test
+    void overlappingScreeningReturnsFalseWhenNoScreeningIsReturned() {
+        Screening newScreening = new Screening(testMovie, testRoom, testStartTime);
+
+        assertFalse(screeningService.isOverlapping(newScreening));
     }
 }
